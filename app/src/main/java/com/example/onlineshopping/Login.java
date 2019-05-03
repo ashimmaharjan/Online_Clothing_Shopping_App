@@ -54,12 +54,19 @@ public class Login extends Fragment {
                     UName=username.getText().toString();
                     Pass=password.getText().toString();
 
-                    if(UName.equals("ashim") && Pass.equals("admin"))
+                    if(UName.equals("user") && Pass.equals("user"))
                     {
                         editor.putString("USERNAME",UName);
                         Intent dashboard=new Intent(getActivity(),Dashboard.class);
                         dashboard.putExtra("USERNAME",UName);
                         startActivity(dashboard);
+                    }
+                    else if(UName.equals("ashim") && Pass.equals("admin"))
+                    {
+                        editor.putString("USERNAME",UName);
+                        Intent userDashboard=new Intent(getActivity(),admin_dashboard.class);
+                        userDashboard.putExtra("USERNAME",UName);
+                        startActivity(userDashboard);
                     }
                     else
                     {
