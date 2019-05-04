@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,7 @@ public class Login extends Fragment {
     Button btnLogin;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    String UName,Pass;
+    String UName,Pass,RegisterUsername,RegisterPassword;
 
     public Login() {
         // Required empty public constructor
@@ -40,9 +41,12 @@ public class Login extends Fragment {
         username=view.findViewById(R.id.inputUsername);
         password=view.findViewById(R.id.inputPassword);
         btnLogin=view.findViewById(R.id.login);
+        getActivity().setTitle("Login");
 
-        sharedPreferences=this.getActivity().getSharedPreferences("pref", Context.MODE_PRIVATE);
+
+        sharedPreferences=this.getActivity().getSharedPreferences("MYPREFS", Context.MODE_PRIVATE);
         editor=sharedPreferences.edit();
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +58,11 @@ public class Login extends Fragment {
                     UName=username.getText().toString();
                     Pass=password.getText().toString();
 
-                    if(UName.equals("user") && Pass.equals("user"))
+                    RegisterUsername=sharedPreferences.getString("NEW_USERNAME",UName);
+                    RegisterPassword=sharedPreferences.getString("NEW_PASSWORD",Pass);
+                    editor.commit();
+
+                    if(UName.equals(RegisterUsername) && Pass.equals(RegisterPassword))
                     {
                         editor.putString("USERNAME",UName);
                         Intent dashboard=new Intent(getActivity(),Dashboard.class);

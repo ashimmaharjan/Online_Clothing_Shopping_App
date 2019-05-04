@@ -1,7 +1,8 @@
 package com.example.onlineshopping;
 
-import android.content.ClipData;
+
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,10 +35,23 @@ public class ItemsAdapter extends RecyclerView.Adapter <ItemsAdapter.ItemsViewHo
     @Override
     public void onBindViewHolder(@NonNull ItemsViewHolder itemsViewHolder, int i) {
 
-        Items items=itemsList.get(i);
+        final Items items=itemsList.get(i);
         itemsViewHolder.iName.setText(items.getItemName());
         itemsViewHolder.iPrice.setText(items.getItemPrice());
         itemsViewHolder.iImage.setImageResource(items.getItemImage());
+
+        itemsViewHolder.iImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent displayClickedItem=new Intent(context,DisplayClickedItem.class);
+                displayClickedItem.putExtra("image",items.getItemImage());
+                displayClickedItem.putExtra("name",items.getItemName());
+                displayClickedItem.putExtra("price",items.getItemPrice());
+
+                context.startActivity(displayClickedItem);
+            }
+        });
     }
 
     @Override

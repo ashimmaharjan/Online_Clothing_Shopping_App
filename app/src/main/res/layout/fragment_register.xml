@@ -51,7 +51,6 @@
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
             style="@style/TextViews"
             android:text="Email:"
             android:layout_below="@id/inputFullName"/>
@@ -62,7 +61,8 @@
             android:layout_height="wrap_content"
             style="@style/editTexts"
             android:hint="Enter email"
-            android:layout_below="@+id/txtEmail"/>
+            android:layout_below="@+id/txtEmail"
+            android:inputType="textEmailAddress"/>
 
         <TextView
             android:id="@+id/txtUsername"
@@ -111,7 +111,8 @@
             android:layout_height="wrap_content"
             style="@style/editTexts"
             android:hint="Re-enter password"
-            android:layout_below="@id/txtConfirmPassword"/>
+            android:layout_below="@id/txtConfirmPassword"
+            android:inputType="textPassword"/>
 
         <TextView
             android:id="@+id/txtPN"
