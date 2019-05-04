@@ -26,7 +26,18 @@
         android:layout_below="@+id/itemName"
         android:layout_toRightOf="@id/itemImage"
         android:hint="Item Price"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:visibility="invisible"/>
 
+    <TextView
+        android:id="@+id/itemDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextViews"
+        android:layout_below="@+id/itemPrice"
+        android:layout_toRightOf="@id/itemImage"
+        android:hint="Item Desc"
+        android:layout_marginTop="20dp"
+        android:visibility="invisible"/>
 
 </RelativeLayout>

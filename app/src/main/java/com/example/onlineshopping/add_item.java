@@ -1,5 +1,6 @@
 package com.example.onlineshopping;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,10 +18,15 @@ public class add_item extends AppCompatActivity {
 
     EditText itemName,itemPrice,itemImageName,itemDesc;
     Button btnAddItem;
+
+    ActionBar actionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
+
+        actionBar=getSupportActionBar();
+        actionBar.setTitle("Add Item");
 
         itemName=findViewById(R.id.inputItemName);
         itemPrice=findViewById(R.id.inputItemPrice);

@@ -41,7 +41,7 @@ public class Login extends Fragment {
         username=view.findViewById(R.id.inputUsername);
         password=view.findViewById(R.id.inputPassword);
         btnLogin=view.findViewById(R.id.login);
-        getActivity().setTitle("Login");
+        getActivity().setTitle("Online Clothing Shopping App");
 
 
         sharedPreferences=this.getActivity().getSharedPreferences("MYPREFS", Context.MODE_PRIVATE);

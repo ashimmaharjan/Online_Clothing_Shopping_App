@@ -5,11 +5,13 @@ public class Items {
     private String itemName;
     private String itemPrice;
     private int itemImage;
+    private String itemDesc;
 
-    public Items(String itemName, String itemPrice, int itemImage) {
+    public Items(String itemName, String itemPrice, int itemImage, String itemDesc) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemImage = itemImage;
+        this.itemDesc = itemDesc;
     }
 
     public String getItemName() {
@@ -34,5 +36,13 @@ public class Items {
 
     public void setItemImage(int itemImage) {
         this.itemImage = itemImage;
+    }
+
+    public String getItemDesc() {
+        return itemDesc;
+    }
+
+    public void setItemDesc(String itemDesc) {
+        this.itemDesc = itemDesc;
     }
 }

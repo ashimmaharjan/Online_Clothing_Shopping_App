@@ -17,11 +17,13 @@ public class ItemsAdapter extends RecyclerView.Adapter <ItemsAdapter.ItemsViewHo
 {
 
     List<Items> itemsList;
-    Context context;
+    Context mContext;
+    private OnItemListener onItemListener;
 
-    public ItemsAdapter(List<Items> itemsList, Context context) {
+    public ItemsAdapter(List<Items> itemsList, Context context,OnItemListener onItemListener) {
         this.itemsList = itemsList;
-        this.context = context;
+        this.mContext = context;
+        this.onItemListener=onItemListener;
     }
 
     @NonNull
@@ -29,7 +31,7 @@ public class ItemsAdapter extends RecyclerView.Adapter <ItemsAdapter.ItemsViewHo
     public ItemsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view= LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_recyclerview,viewGroup,false);
-        return new ItemsViewHolder(view);
+        return new ItemsViewHolder(view,onItemListener);
     }
 
     @Override
@@ -39,19 +41,7 @@ public class ItemsAdapter extends RecyclerView.Adapter <ItemsAdapter.ItemsViewHo
         itemsViewHolder.iName.setText(items.getItemName());
         itemsViewHolder.iPrice.setText(items.getItemPrice());
         itemsViewHolder.iImage.setImageResource(items.getItemImage());
-
-        itemsViewHolder.iImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent displayClickedItem=new Intent(context,DisplayClickedItem.class);
-                displayClickedItem.putExtra("image",items.getItemImage());
-                displayClickedItem.putExtra("name",items.getItemName());
-                displayClickedItem.putExtra("price",items.getItemPrice());
-
-                context.startActivity(displayClickedItem);
-            }
-        });
+        itemsViewHolder.iDesc.setText(items.getItemDesc());
     }
 
     @Override
@@ -59,18 +49,32 @@ public class ItemsAdapter extends RecyclerView.Adapter <ItemsAdapter.ItemsViewHo
         return itemsList.size();
     }
 
-    public class ItemsViewHolder extends RecyclerView.ViewHolder
+    public class ItemsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
-        TextView iName,iPrice;
+        TextView iName,iPrice,iDesc;
         ImageView iImage;
+        OnItemListener onItemListener;
 
-
-        public ItemsViewHolder(@NonNull View itemView) {
+        public ItemsViewHolder(@NonNull View itemView,OnItemListener onItemListener) {
             super(itemView);
             iName=itemView.findViewById(R.id.itemName);
             iPrice=itemView.findViewById(R.id.itemPrice);
             iImage=itemView.findViewById(R.id.itemImage);
+            iDesc=itemView.findViewById(R.id.itemDesc);
+            this.onItemListener=onItemListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+
+            onItemListener.onItemClick(getAdapterPosition());
+        }
+    }
+    public interface  OnItemListener
+    {
+        void onItemClick(int position);
     }
 
 

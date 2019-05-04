@@ -97,10 +97,17 @@ public class Register extends Fragment {
                     rUsername=uName.getText().toString();
                     rPassword=pass.getText().toString();
                     rCPass=cPass.getText().toString();
-                    Toast.makeText(getActivity(), "Registered", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Registered successfully. Now you login form login page", Toast.LENGTH_SHORT).show();
                     editorRegister.putString("NEW_USERNAME",rUsername);
                     editorRegister.putString("NEW_PASSWORD",rPassword);
                     editorRegister.commit();
+
+                    fullName.setText("");
+                    email.setText("");
+                    uName.setText("");
+                    pass.setText("");
+                    cPass.setText("");
+                    pn.setText("");
                 }
 
             }

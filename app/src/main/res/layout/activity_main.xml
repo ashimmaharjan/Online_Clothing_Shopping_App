@@ -32,7 +32,8 @@
         android:background="#3F51B5"
         android:layout_alignParentBottom="true"
         app:tabTextColor="#FF9800"
-        app:tabIndicatorColor="#ffff">
+        app:tabIndicatorColor="#ffff"
+        android:textAlignment="center">
 
     </android.support.design.widget.TabLayout>
 

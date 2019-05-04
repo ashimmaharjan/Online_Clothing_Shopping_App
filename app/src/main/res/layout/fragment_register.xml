@@ -129,7 +129,7 @@
             style="@style/editTexts"
             android:hint="Enter phone number"
             android:layout_below="@+id/txtPN"
-            android:inputType="number"/>
+            android:inputType="phone"/>
 
         <Button
             android:id="@+id/register"
