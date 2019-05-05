@@ -1,5 +1,7 @@
 package com.example.onlineshopping;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +28,8 @@ public class admin_dashboard extends AppCompatActivity implements ItemsAdapter.O
     private RecyclerView recyclerView;
     List<Items> itemsList=new ArrayList<>();
     ActionBar actionBar;
+    String item;
+    Integer iImageName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +47,8 @@ public class admin_dashboard extends AppCompatActivity implements ItemsAdapter.O
         displayUsername.setText(dUsername);
 
         recyclerView=findViewById(R.id.recyclerView);
+        getItems();
 
-        prepareItemsList();
         recyclerView.setAdapter(new ItemsAdapter(itemsList,getApplicationContext(),this));
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
 
@@ -48,7 +57,7 @@ public class admin_dashboard extends AppCompatActivity implements ItemsAdapter.O
             @Override
             public void onClick(View v) {
 
-                Intent logout=new Intent(admin_dashboard.this,Login.class);
+                Intent logout=new Intent(admin_dashboard.this,MainActivity.class);
                 startActivity(logout);
             }
         });
@@ -61,24 +70,40 @@ public class admin_dashboard extends AppCompatActivity implements ItemsAdapter.O
             }
         });
     }
-    public void prepareItemsList()
-    {
-        itemsList.add(new Items("shirt","Rs. 2000",R.drawable.kakashi,"Full Sleeve Shirt"));
-        itemsList.add(new Items("t-shirt","Rs. 1500",R.drawable.tg,"Half Sleeve"));
-    }
-
     @Override
     public void onItemClick(int position) {
 
         iName=itemsList.get(position).getItemName();
         iPrice=itemsList.get(position).getItemPrice();
         iDesc=itemsList.get(position).getItemDesc();
+        iImageName=itemsList.get(position).getItemImage();
 
         Intent openDescription=new Intent(admin_dashboard.this,DisplayClickedItem.class);
         openDescription.putExtra("name",iName);
         openDescription.putExtra("price",iPrice);
         openDescription.putExtra("desc",iDesc);
+        openDescription.putExtra("image",iImageName);
 
         startActivity(openDescription);
+    }
+    private  void getItems()
+    {
+        try {
+            FileInputStream fileInputStream=openFileInput("items.txt");
+            InputStreamReader inputStreamReader=new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader=new BufferedReader(inputStreamReader);
+
+            while ((item=bufferedReader.readLine())!=null)
+            {
+                String[] itemDetails=item.split("->");
+                String itemImage=itemDetails[2];
+                int res=getResources().getIdentifier(itemImage,"drawable",getPackageName());
+                itemsList.add(new Items(itemDetails[0],itemDetails[1],res,itemDetails[3]));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
