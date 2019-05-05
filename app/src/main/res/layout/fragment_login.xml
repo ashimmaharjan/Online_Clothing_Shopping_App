@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login"
-        android:text="Don't have a account yet? Go to register first!!"
+        android:text="Are you a new user?? If so register first!!"
         android:textAlignment="center"
         android:textSize="20sp"
         android:layout_marginTop="10dp"/>

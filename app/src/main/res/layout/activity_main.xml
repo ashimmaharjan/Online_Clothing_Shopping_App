@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tabId"
-        android:background="#3F51B5"
+        android:background="#009688"
         android:layout_alignParentBottom="true"
         app:tabTextColor="#000000"
         app:tabIndicatorColor="#ffff" />
